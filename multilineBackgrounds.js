@@ -3,6 +3,7 @@ function multilineBackgrounds() {
   const multilineBlocks = document.querySelectorAll('.js-padded-multiline-src');
   multilineBlocks.forEach(multilineBlock => {
     const originalContent = multilineBlock.innerHTML;
+    const hideUrlStart = ( multilineBlock.dataset.hideWww == 'hide' );
     let formated = originalContent.replace(/<br>/gi, '[linebreak]');
     let tempDiv = document.createElement('div');
     tempDiv.innerHTML = formated.trim();
@@ -10,11 +11,15 @@ function multilineBackgrounds() {
     let target;          
     let output = "";
     let zIndex = split.length;
+    
+    
     split.forEach((line, i) => {
+      // Checking if we need to hide the url beginning
+      if ( i == 0 && hideUrlStart ) line = line.split('www.')[1];              
+      
       (line == '') ? output += `<span class="emptyLine"></span>` : output += `<span>${line}</span>`;
-      if (i < split.length - 1) {
-        output += "<br>";
-      }
+      if (i < split.length - 1) output += "<br>";
+      
       zIndex--;
     });
 
