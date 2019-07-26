@@ -6,17 +6,21 @@ function multilineBackgrounds() {
         let formated = originalContent
             .replace(/<br>/gi, '[linebreak]')
             .replace(/<strong>/gi, '[strong-open]')
-            .replace(/<\/strong>/gi, '[strong-close]');
+            .replace(/<\/strong>/gi, '[strong-close]')
+            .replace(/<span style="text-decoration: underline;">|<span style="text-decoration: underline;" data-mce-style="text-decoration: underline;">/gi, '[underline-open]')
+            .replace(/<\/span>/gi, '[underline-close]');
         let tempDiv = document.createElement('div');
         tempDiv.innerHTML = formated.trim();
         const split = tempDiv.innerText.trim().split("[linebreak]");
-        let target;          
+        let target;
         let output = "";
         let zIndex = split.length;
         split.forEach((line, i) => {
             const finalLine = line
                 .replace(/\[strong-open\]/gi, '<strong>')
-                .replace(/\[strong-close\]/gi, '</strong>');
+                .replace(/\[strong-close\]/gi, '</strong>')
+                .replace(/\[underline-open\]/gi, '<span style="text-decoration: underline;">')
+                .replace(/\[underline-close\]/gi, '</span>');
             (finalLine == '') ? output += `<span class="emptyLine"></span>` : output += `<span>${finalLine}</span>`;
           if (i < split.length - 1) {
             output += "<br>";
