@@ -3,13 +3,77 @@
 <head>
     <meta charset="UTF-8">
     <title>Multiline Backgrounds</title>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
     <style>
-      .js-padded-multiline-src { display: none; }
+      :root {
+        --white: #fff;
+      }
+
+      body {
+        margin: 0;
+        padding: 2rem;
+        height: 100vh;
+        font-family: 'Open Sans', sans-serif;
+        background: tomato;
+      }
+
+      /* Padded multiline styling */
+      .padded-multiline {
+        position: relative;
+      }
+
+      .padded-multiline span {
+        position: relative;
+        display: inline-block;
+        line-height: 0.9em;
+        font-size: 1em;
+      }
+
+      .padded-multiline-bg {
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
+
+      .padded-multiline-bg span {
+        color: transparent;
+      }
+
+      .heading .padded-multiline span strong {
+        font-weight: bold;
+      }
+
+      .padded-multiline-bg span:before {
+        content: '';
+        position: absolute;
+        top: -0.2rem;
+        bottom: -0.5em;
+        left: -0.11rem;
+        right: -0.5em;
+        background: var(--white);
+      }
+
+      .padded-multiline-bg span.emptyLine:before { display: none; }
+
+      .js-padded-multiline-src { 
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        opacity: 0;
+        z-index: 999;
+      } 
+
+      .js-padded-multiline-target {
+        position: relative;
+        z-index: 1;
+      }
     </style>
 </head>
 <body>
   <div class="padded-multiline">
-    <div id="js-padded-multiline-target-1"></div>
+    <div class="js-padded-multiline-target" id="js-padded-multiline-target-1"></div>
     <div class="js-padded-multiline-src" data-target-id="js-padded-multiline-target-1">
       Lorem ipsum <strong>dolor</strong> sit amet, consectetur adipisicing elit. <strong>Corporis</strong> animi quia vero dolor veritatis<br> cupiditate alias quos, aperiam libero, labore veniam distinctio pariatur placeat culpa laborum, deserunt<br>repudiandae autem dolorem!<br>
       <span style="text-decoration: underline;">Underlined text</span> Lorem ipsum dolor sit amet, consectetur.<br>
