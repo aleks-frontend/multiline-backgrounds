@@ -30,8 +30,8 @@ function multilineBackgrounds() {
             if ( strongOpenCount < strongCloseCount ) strongOpenTag = '<strong>';
             if ( strongOpenCount > strongCloseCount ) strongCloseTag = '</strong>';
 
-            if (finalLine == '') {
-                output += '<span class="emptyLine"></span>';
+            if (finalLine == '' || finalLine == '</strong>') {
+                output += '<span class="emptyLine" style="display:none;"></span>';
             } else {
                 output += `<span>${strongOpenTag + finalLine + strongCloseTag}</span>`;
             }
